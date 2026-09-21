@@ -1,4 +1,4 @@
-document.body.ineerHTML = `<!DOCTYPE html>
+document.body.innerHTML = `<!DOCTYPE html>
 <html>
   <head>
     <title>Reauthenticate - LiteracyPlanet</title>
